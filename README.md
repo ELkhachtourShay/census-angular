@@ -1,3 +1,6 @@
+# Census-app
+extract of US census in us-census.db.gz This file is a SQLite base that contains a table "census_learn_sql” with demographic data.   The goal of this exercice is to create a small web application that visualizes database data.   The application should allow to select a column (amongst demographic data), then display, for each different value in this column, the number of lines with this value, and "age" value average. Values must be sorted by decreasing order. One can display only the 100 first values.
+
 # CensusappFrontend
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.5.
