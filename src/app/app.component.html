@@ -1,0 +1,48 @@
+<app-header></app-header>
+<div>
+  <mat-form-field appearance="fill">
+    <mat-label>Select me</mat-label>
+    <mat-select (model)="filter" (selectionChange)="changeFilter($event)" id="select" *ngIf="persons">
+      <mat-option *ngFor="let field of filters" [value]="field">
+        {{ field }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div  *ngIf="nbrow">
+    <div class="">
+      <span *ngIf="nbrow <= 100">Nombre de lignes affichées: {{ nbrow }} <br></span>
+      <span *ngIf="nbrow > 100 ">Nombre de lignes non affichées: {{ nbrow  - 100}} </span>
+    </div>
+  </div>
+
+
+  <table class="table table-striped" *ngIf="persons">
+    <thead>
+      <tr *ngIf="filter.length">
+        <!-- Si il y a un filtre-->
+        <th>{{ filter }}</th>
+        <th *ngIf="filter != 'age'">Average age</th>
+        <th>Total</th>
+      </tr>
+      <tr *ngIf="!filter.length">
+        <!--si il y a pas de filtre-->
+        <th *ngFor="let field of persons[0] | keyvalue">{{ field.key }}</th>
+        <!--afficher toutes les collones -->
+      </tr>
+    </thead>
+    <tbody *ngIf="!filter.length">
+      <tr *ngFor="let row of persons">
+        <td *ngFor="let value of row | keyvalue">{{ value.value }}</td>
+        <!--afficher toutes les lignes -->
+      </tr>
+    </tbody>
+    <tbody *ngIf="filter.length">
+      <tr *ngFor="let row of persons">
+        <td>{{ row[filter] }}</td>
+        <!--afficher toutes les lignes avec filtre -->
+        <td *ngIf="filter != 'age'" data-label="Average age">{{ row.average_age | number:'1.0-0' }}</td>
+        <td data-label="Total">{{ row.total }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
